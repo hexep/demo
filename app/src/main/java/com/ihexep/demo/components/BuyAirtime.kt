@@ -1,20 +1,25 @@
 package com.ihexep.demo.components
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.OffsetMapping
 import androidx.compose.ui.text.input.TransformedText
 import androidx.compose.ui.text.style.TextAlign
@@ -26,55 +31,60 @@ import com.ihexep.demo.components.custom.AnySizeTextField
 import com.ihexep.demo.ui.theme.DemoTheme
 
 
+const val phone_mask = "000 000 0000"
 
-const val mask = "000 000 0000"
-
-fun mobileNumberFilter(text: AnnotatedString): TransformedText {
-    // change the length
-    val trimmed =
-        if (text.text.length >= 12) text.text.substring(0..12) else text.text
+fun phoneNumberFilter(text: AnnotatedString): TransformedText {
+    val trimmed = if (text.text.length >= 10) text.text.substring(0..9) else text.text
 
     val annotatedString = AnnotatedString.Builder().run {
         for (i in trimmed.indices) {
             append(trimmed[i])
-            if (i == 1 || i == 4 || i == 6) {
+            if (i == 2 || i == 5) {
                 append(" ")
             }
         }
-        pushStyle(SpanStyle(color = Color.LightGray))
-        append(mask.takeLast(mask.length - length))
+        pushStyle(
+            SpanStyle(
+                color = Color(0x1A0A0B0F),
+                fontSize = 12.sp,
+                fontFamily = FontFamily(Font(R.font.ubuntu_regular)),
+                fontWeight = FontWeight.W400
+            )
+        )
+        append(phone_mask.takeLast(phone_mask.length - length))
         toAnnotatedString()
     }
 
     val phoneNumberOffsetTranslator = object : OffsetMapping {
         override fun originalToTransformed(offset: Int): Int {
-            if (offset <= 1) return offset
-            if (offset <= 4) return offset + 1
-            if (offset <= 6) return offset + 2
-            if (offset <= 9) return offset + 3
+            if (offset <= 2) return offset
+            if (offset <= 5) return offset + 1
+            if (offset <= 10) return offset + 2
             return 12
         }
 
         override fun transformedToOriginal(offset: Int): Int {
-            if (offset <= 1) return offset
-            if (offset <= 4) return offset - 1
-            if (offset <= 6) return offset - 2
-            if (offset <= 9) return offset - 3
-            return 9
+            if (offset <= 3 && text.length >= offset) return offset
+            if (offset <= 7 && text.length >= offset - 1) return offset - 1
+            if (offset <= 12 && text.length >= offset - 2) return offset - 2
+            return text.length
         }
     }
 
     return TransformedText(annotatedString, phoneNumberOffsetTranslator)
 }
 
-
-
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BuyAirtime() {
+    var phoneNumber by rememberSaveable { mutableStateOf("") }
+    var amountNumber by rememberSaveable { mutableStateOf("") }
+    val focusManager = LocalFocusManager.current
+    val pattern = remember { Regex("^\\d+\$") }
+
     Column(
         verticalArrangement = Arrangement.spacedBy(15.dp),
-        modifier = Modifier.padding(horizontal = 20.dp)
+        modifier = Modifier
+            .padding(horizontal = 20.dp)
     ) {
         Text(
             text = "Buy Airtime",
@@ -132,12 +142,30 @@ fun BuyAirtime() {
                         fontWeight = FontWeight.W400
                     )
                     AnySizeTextField(
-                        value = "",
-                        onValueChange = {},
+                        value = phoneNumber,
+                        onValueChange = {
+                            if (it.isEmpty() || it.matches(pattern)) {
+                                phoneNumber = it.take(10)
+                            }
+                        },
+                        valueStyle = MaterialTheme.typography.titleSmall.copy(
+                            color = Color(0x800A0B0F),
+                            fontSize = 12.sp,
+                            fontFamily = FontFamily(Font(R.font.ubuntu_regular)),
+                            fontWeight = FontWeight.W400
+                        ),
+                        hintStyle = MaterialTheme.typography.titleSmall.copy(
+                            color = Color(0x1A0A0B0F),
+                            fontSize = 12.sp,
+                            fontFamily = FontFamily(Font(R.font.ubuntu_regular)),
+                            fontWeight = FontWeight.W400
+                        ),
                         shape = RoundedCornerShape(10.dp),
                         border = BorderStroke(1.dp, Color(0xFFE0E0E0)),
                         background = Color(0xFFF8F8F8),
-                        visualTransformation = { mobileNumberFilter(it) },
+                        keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                        visualTransformation = { phoneNumberFilter(it) },
                         modifier = Modifier.height(40.dp)
                     )
                 }
@@ -155,12 +183,30 @@ fun BuyAirtime() {
                         fontWeight = FontWeight.W400
                     )
                     AnySizeTextField(
-                        value = "",
-                        onValueChange = {},
+                        value = amountNumber,
+                        onValueChange = {
+                            if (it.isEmpty() || it.matches(pattern)) {
+                                amountNumber = it
+                            }
+                        },
+                        hint = "100",
+                        valueStyle = MaterialTheme.typography.titleSmall.copy(
+                            color = Color(0x800A0B0F),
+                            fontSize = 12.sp,
+                            fontFamily = FontFamily(Font(R.font.ubuntu_regular)),
+                            fontWeight = FontWeight.W400
+                        ),
+                        hintStyle = MaterialTheme.typography.titleSmall.copy(
+                            color = Color(0x1A0A0B0F),
+                            fontSize = 12.sp,
+                            fontFamily = FontFamily(Font(R.font.ubuntu_regular)),
+                            fontWeight = FontWeight.W400
+                        ),
                         shape = RoundedCornerShape(10.dp),
                         border = BorderStroke(1.dp, Color(0xFFE0E0E0)),
                         background = Color(0xFFF8F8F8),
-                        visualTransformation = { mobileNumberFilter(it) },
+                        keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                         modifier = Modifier.height(40.dp)
                     )
                 }

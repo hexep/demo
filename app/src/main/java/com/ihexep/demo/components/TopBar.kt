@@ -28,6 +28,7 @@ fun TopBar() {
         Icon(
             painter = painterResource(id = R.drawable.ic_user_logo),
             contentDescription = "user_logo",
+            tint = Color.Unspecified,
             modifier = Modifier
                 .size(50.dp)
                 .clip(CircleShape)

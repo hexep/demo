@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
                             detectTapGestures(onTap = { focusManager.clearFocus() })
                         }
                     ) {
-                        LazyColumn() {
+                        LazyColumn(contentPadding = PaddingValues(bottom = 120.dp)) {
                             item { TopBar() }
                             item { Banner() }
                             item { Offers() }

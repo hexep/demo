@@ -1,5 +1,6 @@
 package com.ihexep.demo.components
 
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -10,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -35,6 +37,48 @@ fun Banner() {
                 )
             )
     ) {
+        Canvas(modifier = Modifier.fillMaxSize()) {
+            drawCircle(
+                brush = Brush.linearGradient(
+                    colors = listOf(Color(0xFFFFFFFF), Color(0x00FFFFFF)),
+                    start = Offset.Zero,
+                    end = Offset.Infinite
+                ),
+                alpha = 0.05f,
+                radius = 190.dp.toPx(),
+                center = Offset(x = 46.dp.toPx(), y = 190.dp.toPx())
+            )
+            drawCircle(
+                brush = Brush.linearGradient(
+                    colors = listOf(Color(0xFFFFFFFF), Color(0x00FFFFFF)),
+                    start = Offset.Zero,
+                    end = Offset.Infinite
+                ),
+                alpha = 0.05f,
+                radius = 127.dp.toPx(),
+                center = Offset(x = 15.dp.toPx(), y = 190.dp.toPx())
+            )
+            drawCircle(
+                brush = Brush.linearGradient(
+                    colors = listOf(Color(0xFFFFFFFF), Color(0x00FFFFFF)),
+                    start = Offset.Zero,
+                    end = Offset(0f, Float.POSITIVE_INFINITY)
+                ),
+                alpha = 0.2f,
+                radius = 157.dp.toPx(),
+                center = Offset(x = size.width - 26.dp.toPx(), y = -14.dp.toPx())
+            )
+            drawCircle(
+                brush = Brush.linearGradient(
+                    colors = listOf(Color(0xFFFFFFFF), Color(0x00FFFFFF)),
+                    start = Offset.Zero,
+                    end = Offset(0f, Float.POSITIVE_INFINITY)
+                ),
+                alpha = 0.2f,
+                radius = 105.dp.toPx(),
+                center = Offset(x = size.width - 26.dp.toPx(), y = -14.dp.toPx())
+            )
+        }
         Row(
             horizontalArrangement = Arrangement.spacedBy(10.dp),
             verticalAlignment = Alignment.CenterVertically,

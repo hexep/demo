@@ -26,7 +26,7 @@ import com.ihexep.demo.ui.theme.DemoTheme
 fun Banner() {
     Box(
         modifier = Modifier
-            .padding(top = 30.dp)
+            .padding(top = 20.dp)
             .fillMaxWidth()
             .height(90.dp)
             .background(

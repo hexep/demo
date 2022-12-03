@@ -1,6 +1,7 @@
 package com.ihexep.demo.components
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
@@ -104,7 +105,10 @@ fun BuyAirtime() {
             Row(
                 horizontalArrangement = Arrangement.spacedBy(10.dp),
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(start = 10.dp, top = 15.dp, bottom = 10.dp)
+                modifier = Modifier
+                    .padding(start = 10.dp, top = 15.dp, bottom = 10.dp)
+                    .clip(RoundedCornerShape(6.dp))
+                    .clickable { }
             ) {
                 Icon(
                     painter = painterResource(R.drawable.ic_telkom_logo),
@@ -124,7 +128,8 @@ fun BuyAirtime() {
                 Icon(
                     painter = painterResource(R.drawable.ic_chevron_down),
                     tint = Color.Unspecified,
-                    contentDescription = "chevron_down"
+                    contentDescription = "chevron_down",
+                    modifier = Modifier.padding(end = 5.dp)
                 )
             }
             Row(

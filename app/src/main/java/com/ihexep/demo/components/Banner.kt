@@ -2,6 +2,7 @@ package com.ihexep.demo.components
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
@@ -38,7 +39,10 @@ fun Banner() {
                 )
             )
     ) {
-        Canvas(modifier = Modifier.fillMaxSize()) {
+        Canvas(modifier = Modifier
+            .fillMaxSize()
+            .clickable { /*TODO*/ }
+        ) {
             drawCircle(
                 brush = Brush.linearGradient(
                     colors = listOf(Color(0xFFFFFFFF), Color(0x00FFFFFF)),

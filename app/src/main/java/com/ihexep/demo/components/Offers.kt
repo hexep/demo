@@ -1,13 +1,15 @@
 package com.ihexep.demo.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -42,7 +44,10 @@ fun Offers() {
                 color = Color(0xFFB91A2E),
                 fontSize = 12.sp,
                 style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.W500
+                fontWeight = FontWeight.W500,
+                modifier = Modifier
+                    .clip(shape = RoundedCornerShape(percent = 50))
+                    .clickable { /* TODO */ }
             )
         }
         LazyRow(

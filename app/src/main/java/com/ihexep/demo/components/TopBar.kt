@@ -1,6 +1,7 @@
 package com.ihexep.demo.components
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -34,6 +35,7 @@ fun TopBar() {
             modifier = Modifier
                 .size(50.dp)
                 .clip(CircleShape)
+                .clickable { /*TODO*/ }
         )
         Column(
             modifier = Modifier.weight(1f)

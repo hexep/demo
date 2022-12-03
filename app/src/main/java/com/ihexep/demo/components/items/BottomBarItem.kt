@@ -2,15 +2,9 @@ package com.ihexep.demo.components.items
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButtonDefaults
-import androidx.compose.material3.OutlinedIconButton
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -37,12 +31,18 @@ fun BottomBarItem(action: BottomBarAction) {
                     start = Offset.Zero,
                     end = Offset.Infinite
                 )
-            Card(
-                shape = RoundedCornerShape(50)
+            OutlinedIconButton(
+                onClick = { /*TODO*/ },
+                modifier = Modifier.size(50.dp),
+                border = BorderStroke(0.dp, Color.Transparent),
+                shape = RoundedCornerShape(50),
+                colors = IconButtonDefaults.outlinedIconButtonColors(
+                    containerColor = Color.Transparent
+                )
             ) {
                 Box(
                     modifier = Modifier
-                        .size(50.dp)
+                        .fillMaxSize()
                         .background(gradient),
                     contentAlignment = Alignment.Center,
                 ) {

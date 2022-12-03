@@ -19,12 +19,14 @@ import com.ihexep.demo.model.Explorable
 import com.ihexep.demo.ui.theme.DemoTheme
 import com.ihexep.demo.util.advancedShadow
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ExploreItem(explorable: Explorable) {
     Card(
         shape = RoundedCornerShape(10.dp),
         border = BorderStroke(width = 1.dp, color = Color(0xFFE8E8E8)),
         colors = CardDefaults.cardColors(containerColor = Color(0xFFFCFCFC)),
+        onClick = { /*TODO*/ },
         modifier = Modifier
             .padding(start = 20.dp, end = 20.dp, bottom = 10.dp)
             .fillMaxWidth()

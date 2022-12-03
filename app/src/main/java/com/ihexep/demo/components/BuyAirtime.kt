@@ -95,6 +95,7 @@ fun BuyAirtime() {
             fontSize = 19.sp,
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.W500,
+            modifier = Modifier.padding(horizontal = 10.dp)
         )
         Card(
             shape = RoundedCornerShape(10.dp),

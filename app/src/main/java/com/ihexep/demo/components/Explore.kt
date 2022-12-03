@@ -1,9 +1,6 @@
 package com.ihexep.demo.components
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
@@ -20,23 +17,24 @@ import com.ihexep.demo.model.DemoExplorables
 import com.ihexep.demo.ui.theme.DemoTheme
 
 @Composable
-fun Explore() {
-    Column(verticalArrangement = Arrangement.spacedBy(15.dp)) {
-        Text(
-            text = "Explore",
-            color = Color(0xFF0A0B0F),
-            fontSize = 19.sp,
-            fontWeight = FontWeight.W500,
-            style = MaterialTheme.typography.titleMedium,
-            modifier = Modifier.padding(horizontal = 30.dp)
-        )
-        LazyColumn(
-            contentPadding = PaddingValues(start = 20.dp, end = 20.dp, bottom = 32.dp),
-            verticalArrangement = Arrangement.spacedBy(10.dp)
-        ) {
-            items(DemoExplorables) { explorable ->
-                ExploreItem(explorable = explorable)
-            }
+fun Explore(
+    modifier: Modifier = Modifier
+) {
+    Text(
+        text = "Explore",
+        color = Color(0xFF0A0B0F),
+        fontSize = 19.sp,
+        fontWeight = FontWeight.W500,
+        style = MaterialTheme.typography.titleMedium,
+        modifier = Modifier.padding(horizontal = 30.dp)
+    )
+    LazyColumn(
+        contentPadding = PaddingValues(start = 20.dp, end = 20.dp, top = 35.dp, bottom = 32.dp),
+        verticalArrangement = Arrangement.spacedBy(10.dp),
+        modifier = modifier
+    ) {
+        items(DemoExplorables) { explorable ->
+            ExploreItem(explorable = explorable)
         }
     }
 }

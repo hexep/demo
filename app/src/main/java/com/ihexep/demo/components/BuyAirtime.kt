@@ -84,6 +84,8 @@ fun BuyAirtime() {
     Column(
         verticalArrangement = Arrangement.spacedBy(15.dp),
         modifier = Modifier
+            .padding(top = 30.dp)
+            .height(172.dp)
             .padding(horizontal = 20.dp)
     ) {
         Text(
@@ -97,6 +99,7 @@ fun BuyAirtime() {
             shape = RoundedCornerShape(10.dp),
             border = BorderStroke(width = 1.dp, color = Color(0xFFE8E8E8)),
             colors = CardDefaults.cardColors(containerColor = Color(0xFFFFFFFF)),
+            modifier = Modifier.weight(1f)
         ) {
             Row(
                 horizontalArrangement = Arrangement.spacedBy(10.dp),
@@ -126,7 +129,7 @@ fun BuyAirtime() {
             }
             Row(
                 horizontalArrangement = Arrangement.spacedBy(10.dp),
-                modifier = Modifier.padding(start = 10.dp, end = 10.dp, bottom = 16.dp)
+                modifier = Modifier.padding(start = 10.dp, end = 10.dp)
             ) {
                 Column(
                     verticalArrangement = Arrangement.spacedBy(5.dp),

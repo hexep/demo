@@ -23,7 +23,9 @@ fun TopBar() {
     Row(
         horizontalArrangement = Arrangement.spacedBy(10.dp),
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.padding(start = 20.dp, end = 29.dp)
+        modifier = Modifier
+            .height(81.dp)
+            .padding(start = 20.dp, end = 29.dp, top = 31.dp)
     ) {
         Icon(
             painter = painterResource(id = R.drawable.ic_user_logo),

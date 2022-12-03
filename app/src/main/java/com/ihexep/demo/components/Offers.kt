@@ -19,7 +19,12 @@ import com.ihexep.demo.ui.theme.DemoTheme
 
 @Composable
 fun Offers() {
-    Column(verticalArrangement = Arrangement.spacedBy(20.dp)) {
+    Column(
+        verticalArrangement = Arrangement.SpaceBetween,
+        modifier = Modifier
+            .padding(top = 23.dp)
+            .height(120.dp)
+    ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.padding(horizontal = 30.dp)

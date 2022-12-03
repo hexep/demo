@@ -24,7 +24,10 @@ fun ExploreItem(explorable: Explorable) {
     Card(
         shape = RoundedCornerShape(10.dp),
         border = BorderStroke(width = 1.dp, color = Color(0xFFE8E8E8)),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFFFCFCFC))
+        colors = CardDefaults.cardColors(containerColor = Color(0xFFFCFCFC)),
+        modifier = Modifier
+            .padding(start = 20.dp, end = 20.dp, bottom = 10.dp)
+            .fillMaxWidth()
     ) {
         Row(
             horizontalArrangement = Arrangement.spacedBy(10.dp),
